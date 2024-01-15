@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrastive Active Inference</title>
+    <!-- Bulma CSS  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome icons  -->
+    <script src="https://kit.fontawesome.com/b165665cab.js" crossorigin="anonymous"></script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GWWCKLH7CM"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GWWCKLH7CM');
+    </script>
+</head>
+
+<body>
+    <div class="container p-3 is-primary">
+        <!-- Title section -->
+        <h1 class="title is-1 is-spaced has-text-centered	">Contrastive Active Inference</h1>
+        <h2 class="subtitle is-5 is-spaced has-text-centered"> Presented at NeurIPS 2021</h2>
+        <br> 
+        <div class="columns is-mobile is-centered is-multiline">
+            <div class="column is-one-third-mobile is-narrow-desktop">
+                <a href="https://mazpie.github.io/">
+                    <figure class="image container is-96x96">
+                        <img class="is-rounded" src="./resources/avatars/pietro_mazzaglia.png">
+                    </figure>
+                    <p class="subtitle is-5"> Pietro Mazzaglia</p>
+                </a>
+            </div>
+            <div class="column is-one-third-mobile is-narrow-desktop">
+                <figure class="image container is-96x96">
+                    <img class="is-rounded" src="./resources/avatars/tim_verbelen.jpg">
+                </figure>
+                <p class="subtitle is-5"> Tim Verbelen</p>
+            </div>
+            <div class="column is-one-third-mobile is-narrow-desktop">
+                <figure class="image container is-96x96">
+                    <img class="is-rounded" src="./resources/avatars/bart_dhoedt.jpeg">
+                </figure>
+                <p class="subtitle is-5"> Bart Dhoedt</p>
+            </div>
+        </div>
+        <div class="block is-center has-text-centered">
+            <a class="button is-rounded" href="https://arxiv.org/abs/2110.10083">
+                <span class="icon is-small"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i></span>
+                <span>Article</span>
+            </a>
+            <a class="button is-rounded" href="https://github.com/mazpie/contrastive-aif">
+                <span class="icon is-small"><i class="fa-brands fa-github" aria-hidden="true"></i></span>
+                <span>Code</span>
+            </a>
+            <a class="button is-rounded" href="https://thesmartrobot.github.io/2021/11/18/contrastive-actinf.html">
+                <span class="icon is-small"><i class="fa-solid fa-blog" aria-hidden="true"></i></span>
+                <span>Blog</span>
+            </a>
+            <br />
+            <br />
+            
+        </div>
+        
+        <!-- Abstract -->
+        <h3 class="is-size-3">Learning a model</h3>
+        <div class="columns is-centered is-mobile">
+            <div class="column has-text-centered is-one-third">
+                <figure class="image">
+                    <img src="./resources/imgs/08_contrastive_model.png" />
+                </figure>
+            </div>
+        </div>
+        <p class="is-size-5">
+            Our method, which we dubbed <strong>Contrastive Active Inference</strong>, is an Active Inference instantiation based upon Contrastive Learning. The objective of the agent is always to minimize its free energy. Though, the way it learns to do it it's based on Contrastive Learning. <br/> <br/>
+            
+            In Active Inference, the brain first learns a model of the environment. This model should capture how the environment's state varies, due to the agent's actions. If we perceive the environment through high-dimensional signals, such as images, we may desire a more compact representation to model the environment's dynamics. This can generally be achieved by using a sequential <a href="https://arxiv.org/abs/1312.6114">VAE-like</a> architecture, that learns to generate images that look like the environment's visual observations pixel-by-pixel. <br/> <br/>
+            
+            In our method, the compact representation for the world model is, instead, learned by minimizing a contrastive version of the free energy objective, which we called <strong>contrastive free energy</strong>. By minimizing this objective, the model learns to associate the state of the environment's representation with the corresponding visual observation, while also making the state representation as distinct as possible from the other images. Similar and dissimilar pairs are selected contrasting observations across time and across different behavioral sequences. <br/> <br/>
+        </p>
+        <h3 class="is-size-3">Learning actions</h3>
+        <div class="columns is-centered is-mobile">
+            <div class="column has-text-centered is-one-third">
+                <figure class="image">
+                    <img src="./resources/imgs/08_contrastive_planning.png" />
+                </figure>
+            </div>
+        </div>
+        <p class="is-size-5">
+                With respect to future actions, in Active Inference, we aim to find actions that will minimize free energy, by achieving preferences in an unambiguous way. If we use a VAE-like model for this, it implies imagining how the future will look like, by generating potential images of the future with the model, and computing the distance in pixel space. However, this can be quite problematic. <br/> <br/>
+
+                In the Contrastive Active Inference framework, the agent selects actions that minimize a contrastive objective that we dubbed <strong>contrastive free energy of the future</strong>. This objective enables causes the agent to search for actions that will lead it to states that have the highest similarity with preferences, while avoiding states that correspond to different images. <br/> <br/>
+
+                If you'd like to know more, read the full blog <a href="https://thesmartrobot.github.io/2021/11/18/contrastive-actinf.html">HERE</a>.
+        </p>
+
+        <br />
+
+        <!-- Visual control -->
+        <div class="block box is-size-4">
+            <h2 class="title is-3"> Visual control </h2>
+            <div class="content">
+                We display a visual goal, representing the agent's preference and show the agent's behavior, when operating in front of the original background and of distracting backgrounds.
+            </div>
+            <div class="block box">
+                <div class="columns is-mobile is-centered is-multiline is-1 is-variable">
+                    <div class="column has-text-centered is-one-quarter-mobile">
+                        <div class="has-text-centered"> Visual goal </div>
+                        <figure class="image">
+                            <img src="./resources/imgs/08_reacher_easy_13.png" />
+                        </figure>
+                    </div>
+                    <div class="column has-text-centered is-one-quarter-mobile">
+                        <div class="has-text-centered"> Original </div>
+                        <figure class="image">
+                            <img src="./resources/imgs/08_easy_cut.gif" />
+                        </figure>
+                    </div>
+                    <div class="column has-text-centered is-one-quarter-mobile">
+                        <div class="has-text-centered"> Distracting #1 </div>
+                        <figure class="image">
+                            <img src="./resources/imgs/08_bear_cut.gif" />
+                        </figure>
+                    </div>
+                    <div class="column has-text-centered is-one-quarter-mobile">
+                        <div class="has-text-centered"> Distracting #2 </div>
+                        <figure class="image">
+                            <img src="./resources/imgs/08_boxe_cut.gif" />
+                        </figure>
+                    </div>
+                    <div class="column has-text-centered is-one-quarter-mobile">
+                        <div class="has-text-centered"> Distracting #3 </div>
+                        <figure class="image">
+                            <img src="./resources/imgs/08_boat_cut.gif" />
+                        </figure>
+                    </div>
+                    <div class="column has-text-centered is-one-quarter-mobile">
+                        <div class="has-text-centered"> Distracting #4 </div>
+                        <figure class="image">
+                            <img src="./resources/imgs/08_pole_cut.gif" />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br\>        
+            <div class="block box is-size-5">
+                <h2 class="title is-3"> Citation </h2>
+                    <div class="content notification">
+                        @inproceedings{Mazzaglia2021ContrastiveAIF, <br />
+                            &nbsp; &nbsp; &nbsp; &nbsp;    title = {Contrastive Active Inference}, <br />
+                            &nbsp; &nbsp; &nbsp; &nbsp;    author = {Pietro Mazzaglia and Tim Verbelen and Bart Dhoedt}, <br />
+                            &nbsp; &nbsp; &nbsp; &nbsp;    booktitle = {Advances in Neural Information Processing Systems}, <br />
+                            &nbsp; &nbsp; &nbsp; &nbsp;    year = {2021}, <br />
+                            &nbsp; &nbsp; &nbsp; &nbsp;    url = {https://openreview.net/forum?id=5t5FPwzE6mq}<br />
+                        } <br />
+                    </div>
+                </div>
+            </div>
+        
+            <footer class="footer pt-5 pb-5">
+                <div class="content has-text-centered">
+                    <p>
+                        Website created by
+                        <a href="https://mazpie.github.io"><strong>Pietro Mazzaglia</strong></a>.
+                        <br />
+                        <br />
+                        You are free to borrow the source code,
+                        but please link back to this page in your footer <br />
+                        (and remember to remove the analytics code included in the header of the website).
+                    </p>
+                </div>
+            </footer>
+            </div>
+        </div>
+</body>
+
+</html>
